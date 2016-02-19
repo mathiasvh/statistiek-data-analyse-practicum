@@ -1,0 +1,47 @@
+[1] 51 11
+
+	Shapiro-Wilk normality test
+
+data:  VerschilAfrika
+W = 0.97497, p-value = 0.1946
+
+> t.test(AfrikaBMIfemale$X2008, AfrikaBMIfemale$X2007, paired=TRUE, alternative="greater")
+
+	Paired t-test
+
+data:  AfrikaBMIfemale$X2008 and AfrikaBMIfemale$X2007
+t = 13.391, df = 66, p-value < 2.2e-16
+alternative hypothesis: true difference in means is greater than 0
+95 percent confidence interval:
+ 0.0951823       Inf
+sample estimates:
+mean of the differences 
+              0.1087276 
+
+        Hoog BMI Laag BMI
+males       17.5     11.5
+females     17.5     11.5
+
+        Hoog BMI Laag BMI
+males         14       15
+females       21        8
+
+
+	Pearson's Chi-squared test with Yates' continuity correction
+
+data:  Ctable
+X-squared = 2.5938, df = 1, p-value = 0.1073
+
+
+	2-sample test for equality of proportions without continuity correction
+
+data:  c(succesMBMImale, succesMBMIfemale) out of c(n1, n2)
+X-squared = 3.5304, df = 1, p-value = 0.06025
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ -0.485383337  0.002624717
+sample estimates:
+   prop 1    prop 2 
+0.4827586 0.7241379 
+
+[1] -1.878945

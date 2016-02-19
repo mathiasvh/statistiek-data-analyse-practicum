@@ -1,0 +1,38 @@
+BMIfemale=read.csv(file=file.choose(),header=TRUE,dec=",",sep=";")
+BMImale=read.csv(file=file.choose(),header=TRUE,dec=",",sep=";")
+AfrikaBMIfemale = BMIfemale[BMIfemale$Continent == 4,]
+VerschilAfrika=AfrikaBMIfemale$X2008-AfrikaBMIfemale$X2007
+Boxplot(VerschilAfrika,xlab="",ylab="",main="Boxplot verschilvariabele V")
+points(1, mean(VerschilAfrika), col = "red")
+qqnorm(VerschilAfrika, xlab="Standaardnormale kwantielen", ylab="Verschilvariabele V", main="Kwantielplot verschilvariabele")
+qqline(VerschilAfrika)
+hist(VerschilAfrika, xlab="Verschilvariabele V", ylab="Frequentie", main="Histogram verschilvariabele")
+shapiro.test(VerschilAfrika)
+t.test(AfrikaBMIfemale$X2008, AfrikaBMIfemale$X2007, paired=TRUE, alternative="greater")
+
+MBMIfemale=BMIfemale[BMIfemale$Country == "Malaysia",]
+MBMImale=BMImale[BMImale$Country == "Malaysia",]
+grenswaarde=23.1
+MBMImaleArray=as.numeric(MBMImale[1,])
+MBMImaleArray=MBMImale[-c(1,2)]
+n1=length(MBMImaleArray)
+MBMImaleArray=MBMImaleArray[MBMImaleArray > grenswaarde]
+MBMIfemaleArray=as.numeric(MBMIfemale[1,])
+MBMIfemaleArray=MBMIfemale[-c(1,2)]
+n2=length(MBMIfemaleArray)
+MBMIfemaleArray=MBMIfemaleArray[MBMIfemaleArray > grenswaarde]
+succesMBMImale=length(MBMImaleArray)
+succesMBMIfemale=length(MBMIfemaleArray)
+males=c(succesMBMImale,n1-succesMBMImale)
+females=c(succesMBMIfemale,n2-succesMBMIfemale)
+Ctable=rbind(males,females)
+colnames(Ctable)=c("Hoog BMI","Laag BMI")
+ChiSq <- chisq.test(Ctable)
+ChiSq$expected
+ChiSq$observed
+ChiSq
+prop.test(c(succesMBMImale,succesMBMIfemale),c(n1,n2), correct=FALSE)
+p1=succesMBMImale/n1
+p2=succesMBMIfemale/n2
+p0=(n1*p1+n2*p2)/(n1+n2)
+z=(p1-p2)/sqrt(p0*(1-p0)*(1/n1+1/n2))
